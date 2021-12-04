@@ -512,11 +512,13 @@ def main():
     
     #initialize the grid
     Grid = EmptyGrid()
+
+    ScoreList = []
     
     print("a")
     
     #generate the positions of the first 2 blocks
-    for cfdsvv in range(0,2):
+    for cfdsvv in range(0,20):
         first_seed = numpy.random.randint(0,16)
         second_seed = numpy.random.randint(0,15)
         if second_seed >= first_seed:
@@ -554,7 +556,20 @@ def main():
     
         PrintGrid(Grid)
         print(index,": t= ", end - start)
-        print("Highest-score block", GridMax(Grid))
+        max_element = GridMax(Grid)
+        print("Highest-score block", max_element)
+        ScoreList.append( max_element )
+    
+    total_score = 0
+    j = 0
+    for i in ScoreList:
+        j += 1
+        total_score = i
+    
+    print("Total score: ", total_score)
+    print("Average score", total_score/j)
+
+    
 
 if __name__=="__main__":
     main()
