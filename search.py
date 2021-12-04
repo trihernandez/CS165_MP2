@@ -538,7 +538,7 @@ def main():
             move = NextMove(Grid, index)
             Grid = MergeGrid(Grid, move)
             index += 1
-            print(index,": t= ", end - start)
+            #print(index,": t= ", end - start)
             adding_space = True
             adding_space_index = 0
             while(adding_space is True) and (adding_space_index < 30):
