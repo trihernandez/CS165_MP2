@@ -241,7 +241,7 @@ def ExpectMax2(grid) -> float:
                 grid_list.append(new_grid_a)
                 weight_list.append(1)
                 score_list.append( Max_Move2(new_grid_a) )
-                k += 2
+                k += 1
             j += 1
         i += 1
     
@@ -379,7 +379,7 @@ def ExpectMax(grid) -> float:
                 grid_list.append(new_grid_a)
                 weight_list.append(1)
                 score_list.append( Max_Move(new_grid_a) )
-                k += 2
+                k += 1
             j += 1
         i += 1
     
