@@ -405,7 +405,7 @@ def ExpectMax(grid) -> float:
 
 def NextMove(Grid, Step) -> int: 
 
-    if(Step > 2050):
+    if(Step > 2150):
         return 4
     #matrices of each move
     move_up = CopyGrid(Grid)
@@ -535,10 +535,12 @@ def main():
         #place these blocks on the board; both are worth 2pts
         move = 0
         index = 0
-        while(index < 2050) and (move != 4):
+        while(index < 2150) and (move != 4):
             end = timeit.default_timer()
             move = NextMove(Grid, index)
             Grid = MergeGrid(Grid, move)
+            if(move == 4)
+                break
             index += 1
             #print(index,": t= ", end - start)
             adding_space = True
@@ -557,14 +559,14 @@ def main():
         PrintGrid(Grid)
         print(index,": t= ", end - start)
         max_element = GridMax(Grid)
-        print("Highest-score block", max_element)
+        #print("Highest-score block", max_element)
         ScoreList.append( max_element )
     
     total_score = 0
     j = 0
     for i in ScoreList:
         j += 1
-        total_score = i
+        total_score += i
     
     print("Total score: ", total_score)
     print("Average score", total_score/j)
