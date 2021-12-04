@@ -151,7 +151,7 @@ def MergeGrid(grid, direction):
 
 
 
-def Max_Move2(Grid) -> float:
+def Max_Move3(Grid) -> float:
     #matrices of each move
     move_up = CopyGrid(Grid)
     move_down = CopyGrid(Grid)
@@ -188,6 +188,70 @@ def Max_Move2(Grid) -> float:
 
     if SameGrid(Grid,move_right) is False:
         right_score = GridScore(move_right)
+    else:
+        right_score = nothing_score
+    
+    '''
+    up_score = ExpectMax2(move_up)
+    down_score = ExpectMax2(move_down)
+    left_score = ExpectMax2(move_left)
+    right_score = ExpectMax2(move_right)
+    nothing_score = ExpectMax2(Grid)
+    '''
+
+    max_score = up_score
+    if(down_score > max_score):
+        max_score = down_score
+    if(left_score > max_score):
+        max_score = left_score
+    if(right_score > max_score):
+        max_score = right_score
+    if(nothing_score > max_score):
+        max_score = nothing_score
+
+    return max_score
+
+
+
+
+
+def Max_Move2(Grid) -> float:
+    #matrices of each move
+    move_up = CopyGrid(Grid)
+    move_down = CopyGrid(Grid)
+    move_left = CopyGrid(Grid)
+    move_right = CopyGrid(Grid)
+    
+    up_score = 0.0
+    down_score = 0.0
+    left_score = 0.0
+    right_score = 0.0
+
+    #shift rows left for move_left
+    move_up = MergeGrid(move_up, 0)
+    move_down = MergeGrid(move_down, 1)
+    move_left = MergeGrid(move_left, 2)
+    move_right = MergeGrid(move_right, 3)
+    
+    nothing_score = Max_Move3(Grid)
+    
+    if SameGrid(Grid,move_up) is False:
+        up_score = Max_Move3(move_up)
+    else:
+        up_score = nothing_score
+        
+    if SameGrid(Grid,move_down) is False:
+        down_score = Max_Move3(move_down)
+    else:
+        down_score = nothing_score
+        
+    if SameGrid(Grid,move_left) is False:
+        left_score = Max_Move3(move_left)
+    else:
+        left_score = nothing_score
+
+    if SameGrid(Grid,move_right) is False:
+        right_score = Max_Move3(move_right)
     else:
         right_score = nothing_score
     
@@ -539,8 +603,6 @@ def main():
             end = timeit.default_timer()
             move = NextMove(Grid, index)
             Grid = MergeGrid(Grid, move)
-            if(move == 4):
-                break
             index += 1
             #print(index,": t= ", end - start)
             adding_space = True
@@ -556,12 +618,11 @@ def main():
                     adding_space = False
                 adding_space_index += 1
     
-        if(move > 11):
-            PrintGrid(Grid)
-            print(index,": t= ", end - start)
-            max_element = GridMax(Grid)
-            #print("Highest-score block", max_element)
-            ScoreList.append( max_element )
+        PrintGrid(Grid)
+        print(index,": t= ", end - start)
+        max_element = GridMax(Grid)
+        #print("Highest-score block", max_element)
+        ScoreList.append( max_element )
     
     total_score = 0
     j = 0
