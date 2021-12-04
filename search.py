@@ -539,7 +539,7 @@ def main():
             end = timeit.default_timer()
             move = NextMove(Grid, index)
             Grid = MergeGrid(Grid, move)
-            if(move == 4)
+            if(move == 4):
                 break
             index += 1
             #print(index,": t= ", end - start)
